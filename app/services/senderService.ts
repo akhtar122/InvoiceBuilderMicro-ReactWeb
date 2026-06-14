@@ -1,19 +1,38 @@
 // services/senderService.ts
 
 import api from "@/lib/api";
+import { Sender } from "@/app/types/sender";
 
 export const senderService = {
-  getAll: () => api.get("/senders"),
+  getAll: async (): Promise<Sender[]> => {
+    const res = await api.get("/senders");
+    return res.data;
+  },
 
-  getById: (id: number) =>
-    api.get(`/sender/${id}`),
+  getById: async (id: string): Promise<Sender> => {
+    const res = await api.get(`/senders/${id}`);
+    return res.data;
+  },
 
-  create: (data: any) =>
-    api.post("/sender", data),
+  create: async (data: Sender) => {
+    try {
+      const res = await api.post("/senders", data);
+      return res.data;
+    } catch (err: any) {
+      if (err?.response?.status === 401) {
+        throw new Error("Unauthorized: please login again.");
+      }
+      throw err;
+    }
+  },
 
-  update: (id: number, data: any) =>
-    api.put(`/sender/${id}`, data),
+  update: async (id: string, data: Sender) => {
+    const res = await api.put(`/senders/${id}`, data);
+    return res.data;
+  },
 
-  delete: (id: number) =>
-    api.delete(`/sender/${id}`),
+  delete: async (id: string) => {
+    const res = await api.delete(`/senders/${id}`);
+    return res.data;
+  },
 };
