@@ -1,19 +1,31 @@
 // services/invoiceService.ts
 
 import api from "@/lib/api";
+import { Invoice } from "@/app/types/invoice";
 
 export const invoiceService = {
-  getAll: () => api.get("/invoices"),
+  getAll: async (): Promise<Invoice[]> => {
+    const res = await api.get("/invoices");
+    return res.data;
+  },
 
-  getById: (id: number) =>
-    api.get(`/invoice/${id}`),
+  getById: async (id: string): Promise<Invoice> => {
+    const res = await api.get(`/invoices/${id}`);
+    return res.data;
+  },
 
-  create: (data: any) =>
-    api.post("/invoice", data),
+  create: async (data: Partial<Invoice>) => {
+    const res = await api.post("/invoices", data);
+    return res.data;
+  },
 
-  update: (id: number, data: any) =>
-    api.put(`/invoice/${id}`, data),
+  update: async (id: string, data: Partial<Invoice>) => {
+    const res = await api.put(`/invoices/${id}`, data);
+    return res.data;
+  },
 
-  delete: (id: number) =>
-    api.delete(`/invoice/${id}`),
+  delete: async (id: string) => {
+    const res = await api.delete(`/invoices/${id}`);
+    return res.data;
+  },
 };

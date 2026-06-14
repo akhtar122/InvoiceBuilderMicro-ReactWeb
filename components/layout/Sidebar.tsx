@@ -7,7 +7,7 @@ export default function Sidebar() {
     <aside className="hidden md:flex flex-col w-64 bg-slate-900 text-white">
       <div className="p-6 border-b border-slate-700">
         <h1 className="text-xl font-bold">
-          InvoiceBuilder
+          Public Madical InvoiceBuilder
         </h1>
       </div>
 

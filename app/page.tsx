@@ -20,7 +20,7 @@ export default function Home() {
       {/* Content */}
       <div className="relative z-10 text-center text-white px-6">
         <h1 className="text-6xl font-bold mb-4 tracking-tight">
-          Welcome to <span className="text-blue-400">InvoiceBuilder</span>
+          Welcome to <span className="text-blue-400">Public Madical InvoiceBuilder</span>
         </h1>
         <p className="text-xl mb-8 max-w-md mx-auto">
           Professional invoice management system for your business

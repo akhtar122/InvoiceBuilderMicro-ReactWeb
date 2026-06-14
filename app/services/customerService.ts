@@ -8,8 +8,16 @@ export const customerService = {
   },
 
   getById: async (id: string): Promise<Customer> => {
-    const res = await api.get(`/customers/${id}`);
-    return res.data;
+    try {
+      const res = await api.get(`/customers/${id}`);
+      return res.data;
+    } catch (err: any) {
+      if (err?.response?.status === 404) {
+        const res = await api.get(`/customer/${id}`);
+        return res.data;
+      }
+      throw err;
+    }
   },
 
   create: async (data: Customer) => {
@@ -18,12 +26,28 @@ export const customerService = {
   },
 
   update: async (id: string, data: Customer) => {
-    const res = await api.put(`/customers/${id}`, data);
-    return res.data;
+    try {
+      const res = await api.put(`/customers/${id}`, data);
+      return res.data;
+    } catch (err: any) {
+      if (err?.response?.status === 404) {
+        const res = await api.put(`/customer/${id}`, data);
+        return res.data;
+      }
+      throw err;
+    }
   },
 
   delete: async (id: string) => {
-    const res = await api.delete(`/customers/${id}`);
-    return res.data;
+    try {
+      const res = await api.delete(`/customers/${id}`);
+      return res.data;
+    } catch (err: any) {
+      if (err?.response?.status === 404) {
+        const res = await api.delete(`/customer/${id}`);
+        return res.data;
+      }
+      throw err;
+    }
   },
 };
